@@ -11,7 +11,7 @@ const sendMsg = async (contactID, conversationID, finalMessage) => {
             },
             {
                 headers: {
-                    'api_access_token': `${process.env.CHATWOOT_API_KEY}`,
+                    'api_access_token': process.env.CHATWOOT_API_KEY,
                     'Content-Type': 'application/json'
                 }
             }

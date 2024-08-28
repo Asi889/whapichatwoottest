@@ -5,7 +5,7 @@ const searchForContact = async (contactNumber, contactInfo) => {
     try {
         await axios.get(`https://app.chatwoot.com/api/v1/accounts/101557/contacts/search?q=${contactNumber}`, {
             headers: {
-                'api_access_token': `${process.env.CHATWOOT_API_KEY}`,
+                'api_access_token': process.env.CHATWOOT_API_KEY,
                 'Content-Type': 'application/json'
             }
         }).then((response) => {

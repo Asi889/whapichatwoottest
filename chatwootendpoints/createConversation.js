@@ -11,7 +11,7 @@ const createConversation = async (contactInfo) => {
             },
             {
                 headers: {
-                    'api_access_token': `${process.env.CHATWOOT_API_KEY}`,
+                    'api_access_token': process.env.CHATWOOT_API_KEY,
                     'Content-Type': 'application/json'
                 }
             }

@@ -40,7 +40,7 @@ async function sendWithAttachment(fileUrl, contactId, conversationId, attachment
             formData,
             {
                 headers: {
-                    'api_access_token': `${process.env.CHATWOOT_API_KEY}`,
+                    'api_access_token': process.env.CHATWOOT_API_KEY,
                     ...formData.getHeaders()
                 }
             }
