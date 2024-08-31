@@ -141,6 +141,7 @@ router.post('/', async (req, res) => {
         }
 
         await sendMsg(contactInfo.currentContactID, contactInfo.currentConversationID, finalMessage);
+        res.status(200).send('whapitToChatwoot hapenned with success');
 
 
     } catch (error) {

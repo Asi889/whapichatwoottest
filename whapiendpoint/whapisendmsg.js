@@ -24,7 +24,6 @@ const whapisendmsg = async (formatedNumber, chatwootMessage, channel_id, fileTyp
                 'Content-Type': 'application/json'
             }
         });
-        res.status(200).send('Post hapenned with success11');
 
         return
     } catch (error) {

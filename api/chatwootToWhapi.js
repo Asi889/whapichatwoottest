@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
         }
 
         await whapisendmsg(formatedNumber, chatwootMessage, convertedChannelName.apiKey, "text", "");
-        res.status(200).send('Post hapenned with success22');
+        res.status(200).send('chatwootToWhapi hapenned with success');
 
     } catch (error) {
         console.error('Error sending message to WhatsApp:', error);
