@@ -166,6 +166,7 @@ const express = require('express');
 const handleNewContact = require('../services/handleNewContact');
 const handleExistingContact = require('../services/handleExistingContact');
 const searchForContact = require('../chatwootendpoints/searchForContact');
+const validateMessage = require('../services/validateMessage');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -189,25 +190,16 @@ router.post('/', async (req, res) => {
         file: ""
     };
 
-    if (!req.body?.messages) {
-        console.log("no body");
-        res.status(201).send('no body');
-        return;
+    // Validate the incoming message
+    const validation = validateMessage(req);
+
+    if (!validation.valid) {
+        console.log(validation.message);
+        return res.status(validation.statusCode || 200).send(validation.message);
     }
 
-    if (['972554335933', '972535757173'].includes(req.body.messages[0].from)) {
-        console.log("being sent from whapi phones");
-        res.status(201).send('being sent from whapi phones');
-        return;
-    }
-
-    if (req.body.messages[0].source !== 'mobile' && req.body.messages[0].source !== 'web') {
-        console.log("source is not mobile or web");
-        res.status(201).send('source is not mobile or web');
-        return;
-    }
-
-    const whatsappMessage = req?.body?.messages[0] || "";
+    // Assign values from the validated message
+    const whatsappMessage = validation.whatsappMessage;
 
     if (whatsappMessage) {
         finalMessage = whatsappMessage?.text?.body;
@@ -215,35 +207,6 @@ router.post('/', async (req, res) => {
         contactName = whatsappMessage?.from_name;
         chat_id = whatsappMessage?.chat_id;
         channel_id = req?.body?.channel_id;
-    }
-
-    if (chat_id.includes('@g.us')) {
-        console.log("message from a chat group.");
-        res.status(201).send('message from a chat group');
-        return;
-    }
-
-    if (!whatsappMessage) {
-        console.log('no message ID', req.body);
-        res.status(201).send('no message ID');
-        return;
-    }
-
-    if (whatsappMessage?.action?.type === 'reaction') {
-        finalMessage = `${contactName} just reacted with a ${req.body.messages[0].action.emoji}`;
-    }
-
-    if (
-        whatsappMessage?.contact ||
-        whatsappMessage?.location ||
-        whatsappMessage?.live_location ||
-        whatsappMessage?.poll ||
-        whatsappMessage?.contact_list ||
-        whatsappMessage?.document ||
-        whatsappMessage?.sticker
-    ) {
-        console.log("Message contains unsupported content. Stopping further processing.");
-        finalMessage = "contact tried to send an attachment.";
     }
 
     if (whatsappMessage?.voice || whatsappMessage?.audio || whatsappMessage?.image) {
