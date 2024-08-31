@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
 
     if (!chatwootMessage) {
         console.log("no chatwoot message");
+        res.status(201).send('whapitToChatwoot hapenned with success');
         return;
     }
     if (chatwootMessage.attachments && chatwootMessage.attachments.length > 0) {
@@ -24,11 +25,13 @@ router.post('/', async (req, res) => {
 
     if (chatwootMessage.message_type === 'incoming') {
         console.log("incoming message");
+        res.status(201).send('incoming message');
         return;
     };
 
     if (!chatwootMessage.conversation) {
         console.log("no chatwoot message");
+        res.status(201).send('no chatwoot message');
         return;
     };
 
@@ -50,8 +53,7 @@ router.post('/', async (req, res) => {
                 let data_url = attachment.data_url;
                 await whapisendmsg(formatedNumber, chatwootMessage, convertedChannelName.apiKey, file_type, data_url);
             }
-            console.log("finished loop de loop");
-
+            res.status(200).send('chatwootToWhapi hapenned with success');
             return;
         }
 

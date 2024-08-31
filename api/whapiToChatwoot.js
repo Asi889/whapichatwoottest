@@ -35,11 +35,13 @@ router.post('/', async (req, res) => {
 
     if (!req.body?.messages) {
         console.log("no body");
+        res.status(201).send('no body');
         return;
     }
 
     if (req.body.messages[0].from === '972554335933' || req.body.messages[0].from === '972535757173') {
         console.log("beeing sent from whapi phones");
+        res.status(201).send('beeing sent from whapi phones');
         return
     }
 
@@ -48,6 +50,7 @@ router.post('/', async (req, res) => {
 
     if (req.body.messages[0].source !== 'mobile' && req.body.messages[0].source !== 'web') {
         console.log("source is not mobile or web");
+        res.status(201).send('source is not mobile or web');
         return;
     }
 
@@ -65,11 +68,13 @@ router.post('/', async (req, res) => {
 
     if (chatIdChaeck) {
         console.log("message from a chat group.");
+        res.status(201).send('message from a chat group');
         return;
     }
 
     if (!whatsappMessage) {
         console.log('no message ID', req.body);
+        res.status(201).send('no message ID');
         return;
     }
 
@@ -120,6 +125,7 @@ router.post('/', async (req, res) => {
             }
 
             await sendMsg(contactInfo.newContactID, contactInfo.conversationID, finalMessage);
+            res.status(200).send('whapitToChatwoot hapenned with success');
 
             return;
         }
