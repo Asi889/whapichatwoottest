@@ -10,6 +10,10 @@ app.use(bodyParser.json());
 const whapiToChatwoot = require('./api/whapiToChatwoot');
 const chatwootToWhapi = require('./api/chatwootToWhapi');
 
+app.get('/', (req, res) => {
+    res.send(`Welcome to Asaf's node.js app. Enjoy!`);
+});
+
 app.use('/api/whapiToChatwoot', whapiToChatwoot);
 app.use('/api/chatwootToWhapi', chatwootToWhapi);
 
