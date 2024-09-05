@@ -16,7 +16,8 @@ const handleExistingContact = async (channel_id, contactInfo, finalMessage, atta
     }
 
     if (attachmentFlag) {
-        await sendWithAttachment(contactInfo.file, contactInfo.currentContactID, contactInfo.currentConversationID, attachmentType);
+        await sendWithAttachment(contactInfo.file, contactInfo.currentContactID, contactInfo.currentConversationID, attachmentType, channel_id);
+        return { status: 200, message: 'whapitToChatwoot with attachment happened with success' };
     }
 
 

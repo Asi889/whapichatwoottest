@@ -1,8 +1,9 @@
 const axios = require('axios');
 const FormData = require('form-data');
+const channels = require('../utils/channels');
 const chatwootInboxID = process.env.CHATWOOT_INBOX_ID;
 
-async function sendWithAttachment(fileUrl, contactId, conversationId, attachmentType) {
+async function sendWithAttachment(fileUrl, contactId, conversationId, attachmentType, channel_id) {
     // Map attachment types to appropriate file extensions and content types
     const fileExtensionMap = {
         image: 'png',
@@ -36,7 +37,7 @@ async function sendWithAttachment(fileUrl, contactId, conversationId, attachment
 
         // Send the file to Chatwoot
         await axios.post(
-            `https://app.chatwoot.com/public/api/v1/inboxes/${chatwootInboxID}/contacts/${contactId}/conversations/${conversationId}/messages`,
+            `https://app.chatwoot.com/public/api/v1/inboxes/${channels[channel_id].chatwootInboxID}/contacts/${contactId}/conversations/${conversationId}/messages`,
             formData,
             {
                 headers: {

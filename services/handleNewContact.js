@@ -29,8 +29,8 @@ const handleNewContact = async (contactName, contactNumber, channel_id, contactI
     await createLabel(channels[channel_id].name, contactInfo.conversationID, contactInfo.labels);
 
     if (attachmentFlag) {
-        await sendWithAttachment(contactInfo.file, contactInfo.newContactID, contactInfo.conversationID, attachmentType);
-        return { status: 200, message: 'whapitToChatwoot happened with success' };
+        await sendWithAttachment(contactInfo.file, contactInfo.newContactID, contactInfo.conversationID, attachmentType, channel_id);
+        return { status: 200, message: 'whapitToChatwoot with attachment happened with success' };
     }
     // console.log("loki111");
     // console.log(contactInfo);

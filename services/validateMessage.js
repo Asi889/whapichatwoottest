@@ -1,5 +1,7 @@
 // services/validateMessage.js
 
+const systemNumbers = require("../utils/systemNumbers");
+
 const validateMessage = (req) => {
     const whatsappMessage = req?.body?.messages[0] || "";
     const chat_id = whatsappMessage?.chat_id || "";
@@ -8,7 +10,7 @@ const validateMessage = (req) => {
         return { valid: false, message: "no body", statusCode: 201 };
     }
 
-    if (['972554335933', '972535757173'].includes(whatsappMessage?.from)) {
+    if (systemNumbers.includes(whatsappMessage?.from)) {
         return { valid: false, message: "being sent from whapi phones", statusCode: 201 };
     }
 
