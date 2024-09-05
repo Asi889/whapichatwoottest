@@ -11,7 +11,7 @@ const whapiToChatwoot = require('./api/whapiToChatwoot');
 const chatwootToWhapi = require('./api/chatwootToWhapi');
 
 app.get('/', (req, res) => {
-    res.send(`Welcome to Asaf's Chatwoot <-> Whapi middleware. Enjoy!`);
+    res.send(`Welcome to Asaf's Chatwoot <==> Whapi middleware. Enjoy!`);
 });
 
 app.use('/api/whapiToChatwoot', whapiToChatwoot);
