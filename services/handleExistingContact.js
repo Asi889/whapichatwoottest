@@ -7,7 +7,8 @@ const sendMsg = require('../chatwootendpoints/sendMsg');
 const channels = require('../utils/channels');
 
 const handleExistingContact = async (channel_id, contactInfo, finalMessage, attachmentFlag, attachmentType) => {
-    await listConversations(contactInfo);
+
+    await listConversations(contactInfo, channel_id);
     await listLabels(contactInfo);
 
     if (!contactInfo.labels.includes(channels[channel_id].name)) {
@@ -16,9 +17,11 @@ const handleExistingContact = async (channel_id, contactInfo, finalMessage, atta
 
     if (attachmentFlag) {
         await sendWithAttachment(contactInfo.file, contactInfo.currentContactID, contactInfo.currentConversationID, attachmentType);
-    } else {
-        await sendMsg(contactInfo.currentContactID, contactInfo.currentConversationID, finalMessage);
     }
+
+
+    await sendMsg(contactInfo.currentContactID, contactInfo.currentConversationID, finalMessage, channels[channel_id].chatwootInboxID);
+
 
     return { status: 200, message: 'whapitToChatwoot happened with success' };
 };

@@ -9,7 +9,7 @@ const listLabels = async (contactInfo) => {
         await axios.get(`https://app.chatwoot.com/api/v1/accounts/${chatwootAccountID}/conversations/${contactInfo.currentConversationID}/labels`,
             {
                 headers: {
-                    'api_access_token': chatwootApiKey,
+                    'api_access_token': `${chatwootApiKey}`,
                     'Content-Type': 'application/json'
                 }
             }

@@ -25,10 +25,13 @@ const validateMessage = (req) => {
     }
 
     if (whatsappMessage?.contact || whatsappMessage?.location || whatsappMessage?.live_location || whatsappMessage?.poll || whatsappMessage?.contact_list || whatsappMessage?.document || whatsappMessage?.sticker) {
-        return { valid: true, message: "contact tried to send an attachment", finalMessage: "contact tried to send an attachment" };
+        console.log("contact tried to send an attachment");
+
+        return { valid: true, message: "contact tried to send an attachment", whatsappMessage, statusCode: 204 };
     }
 
-    return { valid: true, message: "valid", whatsappMessage };
+
+    return { valid: true, message: "valid", whatsappMessage, statusCode: 203 };
 };
 
 module.exports = validateMessage;
